@@ -1,30 +1,40 @@
 package Array.TopKandBinarySearch;
+import java.util.*;
 
-import java.util.PriorityQueue;
-
-public class KthLargestElement {
-
-    public static int findKthLargest(int[] nums, int k) {
-        // Min-heap to store the k largest elements
+public class KthLargestElement{
+    public static int kthlargestElement(int[] nums, int k) {
         PriorityQueue<Integer> minHeap = new PriorityQueue<>();
 
-        for (int num : nums) {
-            minHeap.add(num); // Add current number to heap
+        for(int num : nums){
+            minHeap.add(num);
 
-            if (minHeap.size() > k) {
-                minHeap.poll(); // Remove the smallest if size > k
+            if(minHeap.size() > k){
+                minHeap.poll();
             }
         }
 
-        // The root of the heap is the kth largest element
         return minHeap.peek();
     }
 
     public static void main(String[] args) {
-        int[] nums = {1,2,3,4};
-        int k = 4;
-        int result = findKthLargest(nums, k);
-        System.out.println("The " + k + "th largest element is: " + result);
-    }
-}
+        int[] nums = {3,2,1,5,6,4};
+        int k = 2;
+        KthLargestElement obj = new KthLargestElement();
+        int result = obj.kthlargestElement(nums, k);
+        System.out.println("The " + getOrdinal(k) + " largest element is: " + result);
 
+    }
+
+    public static String getOrdinal(int k) {
+        if (k % 100 >= 11 && k % 100 <= 13) {
+            return k + "th";
+        }
+        switch (k % 10) {
+            case 1: return k + "st";
+            case 2: return k + "nd";
+            case 3: return k + "rd";
+            default: return k + "th";
+        }
+    }
+
+}
